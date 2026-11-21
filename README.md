@@ -107,7 +107,7 @@ world_model_stacking/
 | [`trajectory_scoring.ipynb`](notebooks/trajectory_scoring.ipynb) | Weighted full-trajectory cost and five-scene pilot |
 | [`late_horizon_scoring.ipynb`](notebooks/late_horizon_scoring.ipynb) | Late-2, Late-4, and Late-8 scoring comparison |
 | [`action_smoothness.ipynb`](notebooks/action_smoothness.ipynb) | Smoothness penalty, candidate-selection diagnostics, and executed-command variation |
-| `final_combined_cost_benchmark.ipynb` | Parallel 40-scene, five-method benchmark; add this notebook to `notebooks/` before using the link |
+| `combined_cost.ipynb` | Parallel 40-scene, five-method benchmark; add this notebook to `notebooks/` before using the link |
 
 The notebooks are saved artifacts of successive experiments. They may contain earlier exploratory setups and execution outputs; **use the final benchmark notebook and its saved protocol signature** for the reported 40-scene comparison.
 
