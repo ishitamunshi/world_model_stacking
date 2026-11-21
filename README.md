@@ -147,18 +147,14 @@ We conducted three initial experiments, followed by a larger benchmark evaluatin
 
 The original planner minimizes the terminal goal distance:
 ```math
-\[
 J_{\text{baseline}} = \|\hat{z}_H-g\|_2^2
-\]
 ```
 
 We introduced a weighted trajectory cost:
 ```math
-\[
 J_{\text{full}} =
 (1-\alpha)D_H +
 \alpha\sum_{t=1}^{H}w_tD_t
-\]
 ```
 where later predicted states receive greater weight.
 
@@ -172,12 +168,10 @@ Across five initial development scenes, alpha = 0.25 achieved 1.4 mean peak boxe
 
 We evaluated the final 2, 4, and 8 predicted states using:
 ```math
-\[
 J_{\text{late}} =
 (1-\alpha)D_H +
 \alpha\frac{1}{K}
 \sum_{t=H-K+1}^{H}D_t
-\]
 ```
 With alpha = 0.10, **Late-4** performed best among the late-horizon configurations during initial testing.
 
