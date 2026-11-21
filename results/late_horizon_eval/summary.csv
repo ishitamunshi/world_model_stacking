@@ -1,0 +1,7 @@
+method,scenes,mean_peak,mean_final,mean_stack_loss,success_ge_2,success_ge_3,mean_runtime_min
+terminal_baseline,5,0.8,0.8,0.0,0.0,0.0,5.265
+full_alpha_010,5,1.4,0.6,0.8,60.0,20.0,5.323
+full_alpha_025,5,1.4,1.0,0.4,60.0,0.0,5.303
+late_2,5,1.0,0.6,0.4,40.0,0.0,5.437
+late_4,5,1.2,1.2,0.0,40.0,20.0,5.425
+late_8,5,0.8,0.8,0.0,20.0,0.0,5.306

@@ -1,0 +1,6 @@
+scene_seed,full_baseline_original_minus_baseline,full_alpha_010_minus_baseline,full_alpha_025_minus_baseline,late_4_minus_baseline,smooth_beta_005_minus_baseline,smooth_beta_020_minus_baseline,smooth_beta_050_minus_baseline
+100035.0,0.0,2.0,1.0,2.0,0.0,-1.0,-1.0
+100057.0,0.0,-1.0,1.0,-1.0,1.0,0.0,-1.0
+100060.0,0.0,1.0,1.0,0.0,-1.0,2.0,1.0
+100069.0,0.0,0.0,0.0,0.0,0.0,1.0,2.0
+100072.0,0.0,1.0,0.0,1.0,2.0,0.0,2.0

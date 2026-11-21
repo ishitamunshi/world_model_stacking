@@ -1,0 +1,2 @@
+scene_seed,sampler_seed,method,last_k,alpha,candidates,tau,horizon,max_boxes_stacked,final_boxes_stacked,stack_loss,grasp_success,first_placement_step,executed_steps,runtime_minutes,scoring_calls
+100035,100035,late_8,8,0.1,16,0.25,1795,1,1,0,1,247,1795,5.434,359

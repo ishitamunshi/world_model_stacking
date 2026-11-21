@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "method": "combined_b",
+  "scene_seed": 100057,
+  "sample_seed": 0,
+  "episode_seed": 100057,
+  "n_goals": 18,
+  "candidates": 16,
+  "generate": 16,
+  "execute": 1,
+  "tau": 0.25,
+  "horizon": 1795,
+  "max_placed": 0,
+  "final_placed": 0,
+  "final_count": 0,
+  "stack_loss": 0,
+  "first_placement_step": null,
+  "ground_falls": 0,
+  "grasp_steps": 28,
+  "lifted_steps": 1,
+  "success": false,
+  "steps": 1795,
+  "stage_steps": [],
+  "goal_index": 2,
+  "longest_stall_replans": 283,
+  "goal_trace": [
+    [
+      0,
+      0
+    ],
+    [
+      100,
+      1
+    ],
+    [
+      200,
+      1
+    ],
+    [
+      300,
+      1
+    ],
+    [
+      400,
+      2
+    ],
+    [
+      500,
+      2
+    ],
+    [
+      600,
+      2
+    ],
+    [
+      700,
+      2
+    ],
+    [
+      800,
+      2
+    ],
+    [
+      900,
+      2
+    ],
+    [
+      1000,
+      2
+    ],
+    [
+      1100,
+      2
+    ],
+    [
+      1200,
+      2
+    ],
+    [
+      1300,
+      2
+    ],
+    [
+      1400,
+      2
+    ],
+    [
+      1500,
+      2
+    ],
+    [
+      1600,
+      2
+    ],
+    [
+      1700,
+      2
+    ]
+  ],
+  "ranking_calls": 359,
+  "candidate_change_rate": 0.09192200557103064,
+  "agent_s": 59.519,
+  "seconds": 203.263,
+  "protocol_id": "1aba52fda372"
+}

@@ -1,0 +1,2 @@
+scene_seed,sampler_seed,method,beta,candidates,tau,horizon,max_boxes_stacked,final_boxes_stacked,stack_loss,grasp_success,first_placement_step,executed_steps,runtime_minutes,executed_action_smoothness_mse,scoring_calls,candidate_selection_change_rate,mean_selected_predicted_smoothness
+100072,100072,smooth_beta_005,0.05,16,0.25,1795,3,2,1,1,345,1795,5.575,0.011378667880136785,359,0.13370473537604458,0.004511263820714908

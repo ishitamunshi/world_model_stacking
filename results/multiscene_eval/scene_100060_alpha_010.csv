@@ -1,0 +1,2 @@
+scene_seed,sampler_seed,alpha,candidates,tau,horizon,max_boxes_stacked,final_boxes_stacked,grasp_success,first_placement_step,executed_steps,runtime_minutes
+100060,100060,0.1,16,0.25,1795,2,1,1,630,1795,5.375
