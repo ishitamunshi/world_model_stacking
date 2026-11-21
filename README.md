@@ -185,10 +185,8 @@ This suggested that the scoring window can influence stacking performance and fi
 
 We introduced a smoothness penalty:
 ```math
-\[
 J_{\text{smooth}} =
 D_H + \beta c S(a)
-\]
 ```
 where \(S(a)\) measures the average squared difference between consecutive commanded actions and \(c\) scales the penalty relative to the terminal cost.
 
