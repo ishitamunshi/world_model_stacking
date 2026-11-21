@@ -146,19 +146,20 @@ We conducted three initial experiments, followed by a larger benchmark evaluatin
 **Hypothesis:** Considering intermediate predicted states can improve action selection compared with evaluating only the final predicted state.
 
 The original planner minimizes the terminal goal distance:
-
+```math
 \[
 J_{\text{baseline}} = \|\hat{z}_H-g\|_2^2
 \]
+```
 
 We introduced a weighted trajectory cost:
-
+```math
 \[
 J_{\text{full}} =
 (1-\alpha)D_H +
 \alpha\sum_{t=1}^{H}w_tD_t
 \]
-
+```
 where later predicted states receive greater weight.
 
 We tested several values of alpha, with **alpha = 0.25** emerging as the strongest configuration for peak stacking performance.
@@ -170,14 +171,14 @@ Across five initial development scenes, alpha = 0.25 achieved 1.4 mean peak boxe
 **Hypothesis:** Concentrating on the final few predicted states may allow more flexible intermediate manipulation while maintaining progress toward the target.
 
 We evaluated the final 2, 4, and 8 predicted states using:
-
+```math
 \[
 J_{\text{late}} =
 (1-\alpha)D_H +
 \alpha\frac{1}{K}
 \sum_{t=H-K+1}^{H}D_t
 \]
-
+```
 With alpha = 0.10, **Late-4** performed best among the late-horizon configurations during initial testing.
 
 It achieved 1.2 mean final boxes and zero observed stack loss across five development scenes.
@@ -189,12 +190,12 @@ This suggested that the scoring window can influence stacking performance and fi
 **Hypothesis:** Penalizing abrupt changes in proposed robot commands may improve manipulation stability.
 
 We introduced a smoothness penalty:
-
+```math
 \[
 J_{\text{smooth}} =
 D_H + \beta c S(a)
 \]
-
+```
 where \(S(a)\) measures the average squared difference between consecutive commanded actions and \(c\) scales the penalty relative to the terminal cost.
 
 We evaluated beta values of 0.05, 0.20, and 0.50.
