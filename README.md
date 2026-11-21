@@ -240,45 +240,29 @@ Compared with the baseline:
 - Subgoal progress improved from a mean final subgoal index of 4.575 to 6.125.
 
 In paired scene comparisons, full-trajectory scoring improved 13 scenes, worsened 7, and matched the baseline on 20.
-
 The mean paired improvement was +0.175 boxes, with a bootstrap 95% confidence interval of [-0.175, 0.525].
-
 Because the interval includes zero, the observed improvement is promising but statistically inconclusive.
 
 ### Main Findings
 
 **1. Intermediate world-model predictions contain useful planning information.**
-
 Full-trajectory scoring achieved better average stacking performance than terminal-only scoring in the 40-scene evaluation.
 
 **2. The choice of scoring window matters.**
-
 Late-4 showed promising final stack retention in the initial experiments, while full-trajectory scoring achieved stronger average peak stacking performance in the larger benchmark.
 
 **3. Smoother commands do not necessarily produce better stacking outcomes.**
-
 The smoothness penalty reduced executed-command variation, but improvements in final stacking were inconsistent.
 
 **4. Combining multiple cost functions does not guarantee improved performance.**
-
 Neither combined configuration outperformed full-trajectory scoring alone. The stronger combined weighting reduced performance below the baseline.
 
 **5. Subgoal progress remains a challenge.**
-
 Full-trajectory scoring improved progress through the visual subgoals, but all methods remained substantially behind the scripted reference trajectory.
 
 ### Conclusion
 
-Our experiments show that the way a planner evaluates predicted future states can meaningfully influence robotic manipulation behavior.
+**Full-trajectory scoring with alpha = 0.25 was the strongest observed configuration**, achieving a 15.9% higher mean peak stack count than our original baseline across 40 scenes. The results suggest that intermediate latent predictions can provide useful information for selecting actions in model-predictive robotic manipulation.
 
-**Full-trajectory scoring with alpha = 0.25 was the strongest observed configuration**, achieving a 15.9% higher mean peak stack count than our original baseline across 40 scenes.
-
-The results suggest that intermediate latent predictions can provide useful information for selecting actions in model-predictive robotic manipulation.
-
-The evaluation also revealed limitations in stacking consistency, subgoal progression, and the effectiveness of combining cost components.
-
-These findings motivate further investigation into trajectory-aware planning, subgoal management, and generalization across additional scenes and policy sampling seeds.
-
-The 40-scene benchmark serves as a development evaluation. Additional held-out testing is required to establish whether the observed improvements generalize.
 
 
