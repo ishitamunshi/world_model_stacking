@@ -130,3 +130,155 @@ The notebooks are saved artifacts of successive experiments. They may contain ea
 - A larger cost function is not automatically better. Both combined variants failed to outperform full-trajectory α=0.25 in this experiment.
 - The project optimizes a **latent-distance planning objective**; latent closeness is not a direct physical measure of box support, contact stability, or robustness to perturbations.
 
+
+## Experimental Results and Key Findings
+
+### Research Objective
+
+This project investigates how different trajectory-scoring functions influence decision-making in world-model-based robotic manipulation.
+
+The pretrained policy generates 16 candidate action sequences, and the world model predicts their future latent states. Our contribution focuses on improving how the planner evaluates these predictions and selects actions.
+
+We conducted three initial experiments, followed by a larger benchmark evaluating the strongest individual methods and their combinations.
+
+### Experiment 1: Full-Trajectory Scoring
+
+**Hypothesis:** Considering intermediate predicted states can improve action selection compared with evaluating only the final predicted state.
+
+The original planner minimizes the terminal goal distance:
+
+\[
+J_{\text{baseline}} = \|\hat{z}_H-g\|_2^2
+\]
+
+We introduced a weighted trajectory cost:
+
+\[
+J_{\text{full}} =
+(1-\alpha)D_H +
+\alpha\sum_{t=1}^{H}w_tD_t
+\]
+
+where later predicted states receive greater weight.
+
+We tested several values of alpha, with **alpha = 0.25** emerging as the strongest configuration for peak stacking performance.
+
+Across five initial development scenes, alpha = 0.25 achieved 1.4 mean peak boxes, compared with 0.8 for the baseline.
+
+### Experiment 2: Late-Horizon Scoring
+
+**Hypothesis:** Concentrating on the final few predicted states may allow more flexible intermediate manipulation while maintaining progress toward the target.
+
+We evaluated the final 2, 4, and 8 predicted states using:
+
+\[
+J_{\text{late}} =
+(1-\alpha)D_H +
+\alpha\frac{1}{K}
+\sum_{t=H-K+1}^{H}D_t
+\]
+
+With alpha = 0.10, **Late-4** performed best among the late-horizon configurations during initial testing.
+
+It achieved 1.2 mean final boxes and zero observed stack loss across five development scenes.
+
+This suggested that the scoring window can influence stacking performance and final stack retention.
+
+### Experiment 3: Action Smoothness Scoring
+
+**Hypothesis:** Penalizing abrupt changes in proposed robot commands may improve manipulation stability.
+
+We introduced a smoothness penalty:
+
+\[
+J_{\text{smooth}} =
+D_H + \beta c S(a)
+\]
+
+where \(S(a)\) measures the average squared difference between consecutive commanded actions and \(c\) scales the penalty relative to the terminal cost.
+
+We evaluated beta values of 0.05, 0.20, and 0.50.
+
+At beta = 0.50, executed-command variation decreased by approximately 56% relative to the baseline across five development scenes.
+
+However, smoother commands did not consistently improve final stacking performance. This finding indicates that minimizing commanded-action variation alone is insufficient to guarantee better manipulation outcomes.
+
+### Final Experiment: 40-Scene Planning Benchmark
+
+We evaluated the strongest configurations across **40 validation scenes**, using identical environment settings and policy sampling seed 0.
+
+The evaluation compared five planners:
+
+1. Original terminal-distance baseline.
+2. Full-trajectory scoring (alpha = 0.25).
+3. Late-4 scoring (alpha = 0.10).
+4. Combined A: 80% terminal + 10% full trajectory + 10% Late-4.
+5. Combined B: 70% terminal + 15% full trajectory + 15% Late-4.
+
+A total of **200 simulation episodes** were completed using parallel evaluation on an NVIDIA L4 GPU.
+
+#### Quantitative Results
+
+| Planner | Mean Peak Boxes | Mean Final Boxes | Success >=2 | Success >=3 |
+|---|---:|---:|---:|---:|
+| Baseline | 1.100 | 1.025 | 22.5% | 5.0% |
+| **Full Trajectory (0.25)** | **1.275** | **1.125** | **30.0%** | **10.0%** |
+| Late-4 (0.10) | 1.200 | 1.025 | 30.0% | 2.5% |
+| Combined A | 1.200 | 1.100 | 27.5% | 7.5% |
+| Combined B | 0.900 | 0.750 | 17.5% | 5.0% |
+
+#### Best-Performing Method
+
+**Full-trajectory scoring with alpha = 0.25 achieved the highest mean peak stacking performance.**
+
+Compared with the baseline:
+
+- Mean peak boxes increased from 1.100 to 1.275, a **15.9% relative improvement**.
+- Mean final boxes increased from 1.025 to 1.125.
+- Success rate for stacking at least two boxes increased from 22.5% to 30.0%.
+- Success rate for stacking at least three boxes increased from 5.0% to 10.0%.
+- Subgoal progress improved from a mean final subgoal index of 4.575 to 6.125.
+
+In paired scene comparisons, full-trajectory scoring improved 13 scenes, worsened 7, and matched the baseline on 20.
+
+The mean paired improvement was +0.175 boxes, with a bootstrap 95% confidence interval of [-0.175, 0.525].
+
+Because the interval includes zero, the observed improvement is promising but statistically inconclusive.
+
+### Main Findings
+
+**1. Intermediate world-model predictions contain useful planning information.**
+
+Full-trajectory scoring achieved better average stacking performance than terminal-only scoring in the 40-scene evaluation.
+
+**2. The choice of scoring window matters.**
+
+Late-4 showed promising final stack retention in the initial experiments, while full-trajectory scoring achieved stronger average peak stacking performance in the larger benchmark.
+
+**3. Smoother commands do not necessarily produce better stacking outcomes.**
+
+The smoothness penalty reduced executed-command variation, but improvements in final stacking were inconsistent.
+
+**4. Combining multiple cost functions does not guarantee improved performance.**
+
+Neither combined configuration outperformed full-trajectory scoring alone. The stronger combined weighting reduced performance below the baseline.
+
+**5. Subgoal progress remains a challenge.**
+
+Full-trajectory scoring improved progress through the visual subgoals, but all methods remained substantially behind the scripted reference trajectory.
+
+### Conclusion
+
+Our experiments show that the way a planner evaluates predicted future states can meaningfully influence robotic manipulation behavior.
+
+**Full-trajectory scoring with alpha = 0.25 was the strongest observed configuration**, achieving a 15.9% higher mean peak stack count than our original baseline across 40 scenes.
+
+The results suggest that intermediate latent predictions can provide useful information for selecting actions in model-predictive robotic manipulation.
+
+The evaluation also revealed limitations in stacking consistency, subgoal progression, and the effectiveness of combining cost components.
+
+These findings motivate further investigation into trajectory-aware planning, subgoal management, and generalization across additional scenes and policy sampling seeds.
+
+The 40-scene benchmark serves as a development evaluation. Additional held-out testing is required to establish whether the observed improvements generalize.
+
+
